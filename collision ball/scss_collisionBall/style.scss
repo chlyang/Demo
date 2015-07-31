@@ -1,0 +1,41 @@
+$unit: 40px;
+
+body {
+	background: #18162e;
+  height: 100%;
+}
+
+.wrapper {
+  text-align: center;
+}
+ 
+.wrapper:before {
+  content: '';
+  display: inline-block;
+  height: 100px;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+
+.container {
+  display: block;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle;
+  width: 400px;
+}
+
+.circle {
+	border: 1px solid #e35bd5;
+	border-radius: 100%;
+	height: $unit;
+	opacity: .3;
+	position: absolute;
+	width: $unit;
+	-webkit-transform-origin: 0 0;
+  
+	&:not(:last-child) {
+		background: transparent!important;
+	}
+}

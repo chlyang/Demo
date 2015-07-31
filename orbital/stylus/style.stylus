@@ -1,0 +1,75 @@
+@import "nib"
+
+$numOrbits = 4
+$speed = 1s
+$h = 200px
+$w = 200px
+$background = rgb(37, 37, 39)
+$foreground = #ddd
+
+@keyframes hspin
+  from
+    height: $h
+    margin-top: -($h/2)
+  to
+    height: 0
+    margin-top: 0
+
+for i in 1..$numOrbits
+  $keyframe-name = (seq3 + i)
+  @keyframes {$keyframe-name}
+    from
+      height: $h+(-20*i)
+      margin-top: -(($h+(i*-20))/2)
+    to 
+      height: 0 
+      margin-top: 0
+body,
+html
+  background $background
+
+.orbit
+  position: absolute
+  top: 50%
+  left: 50%
+  width: $w
+  height: $h
+  margin-left: -($w/2)
+  margin-top: -($h/2)
+  border: 2px solid $foreground
+  border-radius: 50%
+  animation-duration: $speed
+  animation-timing-function: ease-in
+  animation-iteration-count: infinite
+  animation-direction: alternate
+  animation-fill-mode: both
+
+for i in 1..$numOrbits
+  .o{i}
+    transform: rotate((i*45) deg)
+
+#spinner
+  &.sequence1
+    for i in 1..$numOrbits
+      .o{i}
+        animation-name: hspin
+        transform: rotate((i*45) deg)
+  &.sequence2
+    for i in 1..$numOrbits
+      .o{i}
+        animation-name: hspin
+        animation-delay: (.5*i)s
+  &.sequence3,
+  &.sequence4
+    for i in 1..$numOrbits
+      .o{i}
+        height: $h-(20*i)
+        width: $w+(-20*i)
+        margin-left: -(($w+(i*-20))/2)
+        animation-name: (seq3 + i)
+        animation-timing-function: linear
+  &.sequence4
+    for i in 1..$numOrbits
+      .o{i}
+        animation-delay: (.25*i)s
+        animation-timing-function: ease-in
